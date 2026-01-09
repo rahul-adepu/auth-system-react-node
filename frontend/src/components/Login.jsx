@@ -58,7 +58,8 @@ const Login = () => {
         <div className="mb-6">
           <button
             type="button"
-            className="w-full cursor-default rounded-md bg-[#40e0d0] py-3 text-[13px] font-bold tracking-[1.5px] text-white shadow-[0_4px_15px_rgba(64,224,208,0.3)]"
+            onClick={() => navigate('/register')}
+            className="w-full cursor-pointer rounded-md bg-[#3b82f6] py-3 text-[13px] font-bold tracking-[1.5px] text-white shadow-[0_4px_15px_rgba(59,130,246,0.35)] transition hover:bg-[#2563eb]"
           >
             SIGN IN
           </button>
@@ -90,7 +91,7 @@ const Login = () => {
             <input
               type="email"
               name="email"
-              placeholder="email"
+              placeholder="Email"
               value={formData.email}
               onChange={handleChange}
               required
@@ -108,7 +109,7 @@ const Login = () => {
             <input
               type="password"
               name="password"
-              placeholder="password"
+              placeholder="Password"
               value={formData.password}
               onChange={handleChange}
               required
@@ -135,15 +136,12 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="mt-2 rounded-md bg-[#40e0d0] py-3 text-[13px] font-bold tracking-[1.5px] text-white shadow-[0_4px_15px_rgba(64,224,208,0.3)] transition hover:shadow-[0_6px_20px_rgba(64,224,208,0.4)] disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-2 rounded-md bg-[#3b82f6] py-3 text-[13px] font-bold tracking-[1.5px] text-white shadow-[0_4px_15px_rgba(59,130,246,0.35)] transition hover:bg-[#2563eb] hover:shadow-[0_6px_20px_rgba(59,130,246,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? 'LOGGING IN...' : 'LOGIN'}
           </button>
 
-          {/* Hidden per screenshot (no sign-up link on login card) */}
-          <button type="button" onClick={() => navigate('/register')} className="hidden">
-            Sign up
-          </button>
+          {/* removed per requirement */}
         </form>
       </div>
     </div>
