@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUserData, clearUserData } from '../utils/auth';
-import './Dashboard.css';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -77,13 +76,13 @@ const Dashboard = () => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'Active':
-        return '#4caf50';
+        return 'bg-[#4caf50]';
       case 'Suspended':
-        return '#f44336';
+        return 'bg-[#f44336]';
       case 'Inactive':
-        return '#ff9800';
+        return 'bg-[#ff9800]';
       default:
-        return '#9e9e9e';
+        return 'bg-[#9e9e9e]';
     }
   };
 
@@ -92,76 +91,64 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-header">
-        <div className="header-content">
-          <h1>User Management</h1>
-          <div className="user-info">
-            <span>Welcome, {user.name}</span>
-            <button onClick={handleLogout} className="logout-button">
+    <div className="min-h-screen bg-[#f5f5f5]">
+      <div className="mb-8 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+        <div className="mx-auto flex max-w-[1200px] items-center justify-between px-5 py-5">
+          <h1 className="text-[28px] font-semibold text-[#333]">User Management</h1>
+          <div className="flex items-center gap-5">
+            <span className="text-[14px] text-[#666]">Welcome, {user.name}</span>
+            <button
+              onClick={handleLogout}
+              className="rounded bg-[#f44336] px-4 py-2 text-[14px] text-white transition hover:bg-[#d32f2f]"
+            >
               Logout
             </button>
           </div>
         </div>
       </div>
 
-      <div className="dashboard-content">
-        <div className="table-container">
-          <table className="users-table">
-            <thead>
+      <div className="mx-auto max-w-[1200px] px-5">
+        <div className="overflow-hidden rounded-lg bg-white shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+          <table className="w-full border-collapse">
+            <thead className="bg-[#f8f9fa]">
               <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Date Created</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th className="border-b-2 border-[#e0e0e0] px-4 py-4 text-left text-[14px] font-semibold text-[#333]">#</th>
+                <th className="border-b-2 border-[#e0e0e0] px-4 py-4 text-left text-[14px] font-semibold text-[#333]">Name</th>
+                <th className="border-b-2 border-[#e0e0e0] px-4 py-4 text-left text-[14px] font-semibold text-[#333]">Date Created</th>
+                <th className="border-b-2 border-[#e0e0e0] px-4 py-4 text-left text-[14px] font-semibold text-[#333]">Role</th>
+                <th className="border-b-2 border-[#e0e0e0] px-4 py-4 text-left text-[14px] font-semibold text-[#333]">Status</th>
+                <th className="border-b-2 border-[#e0e0e0] px-4 py-4 text-left text-[14px] font-semibold text-[#333]">Action</th>
               </tr>
             </thead>
             <tbody>
-              {staticUsers.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>
-                    <div className="user-cell">
-                      <span className="user-avatar">{user.avatar}</span>
-                      <span>{user.name}</span>
+              {staticUsers.map((row) => (
+                <tr key={row.id} className="border-b border-[#e0e0e0] text-[14px] text-[#666] hover:bg-[#f8f9fa]">
+                  <td className="px-4 py-4">{row.id}</td>
+                  <td className="px-4 py-4">
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e0e0e0] text-[20px]">
+                        {row.avatar}
+                      </span>
+                      <span>{row.name}</span>
                     </div>
                   </td>
-                  <td>{user.dateCreated}</td>
-                  <td>{user.role}</td>
-                  <td>
-                    <span
-                      className="status-badge"
-                      style={{ backgroundColor: getStatusColor(user.status) }}
-                    >
-                      {user.status}
+                  <td className="px-4 py-4">{row.dateCreated}</td>
+                  <td className="px-4 py-4">{row.role}</td>
+                  <td className="px-4 py-4">
+                    <span className={`inline-block rounded-full px-3 py-1 text-[12px] font-medium text-white ${getStatusColor(row.status)}`}>
+                      {row.status}
                     </span>
                   </td>
-                  <td>
-                    <div className="action-buttons">
-                      <button className="action-btn edit-btn" title="Edit">
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        >
+                  <td className="px-4 py-4">
+                    <div className="flex gap-2">
+                      <button className="flex h-8 w-8 items-center justify-center rounded text-[#2196f3] transition hover:bg-[#e3f2fd]" title="Edit">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                         </svg>
                       </button>
-                      <button className="action-btn delete-btn" title="Delete">
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        >
+                      <button className="flex h-8 w-8 items-center justify-center rounded text-[#f44336] transition hover:bg-[#ffebee]" title="Delete">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <line x1="18" y1="6" x2="6" y2="18"></line>
                           <line x1="6" y1="6" x2="18" y2="18"></line>
                         </svg>
@@ -173,14 +160,22 @@ const Dashboard = () => {
             </tbody>
           </table>
 
-          <div className="pagination">
-            <button className="page-btn">Previous</button>
-            <button className="page-btn active">1</button>
-            <button className="page-btn">2</button>
-            <button className="page-btn">3</button>
-            <button className="page-btn">4</button>
-            <button className="page-btn">5</button>
-            <button className="page-btn">Next</button>
+          <div className="flex items-center justify-end gap-2 border-t border-[#e0e0e0] p-5">
+            {['Previous', '1', '2', '3', '4', '5', 'Next'].map((label) => {
+              const isActive = label === '1';
+              return (
+                <button
+                  key={label}
+                  className={
+                    isActive
+                      ? 'rounded border border-[#2196f3] bg-[#2196f3] px-3 py-2 text-[14px] text-white'
+                      : 'rounded border border-[#e0e0e0] bg-white px-3 py-2 text-[14px] text-[#666] transition hover:border-[#2196f3] hover:bg-[#f5f5f5] hover:text-[#2196f3]'
+                  }
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>

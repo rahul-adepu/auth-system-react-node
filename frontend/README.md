@@ -14,6 +14,14 @@ npm run dev
 
 The app will be available at `http://localhost:3000`
 
+## Styling (Tailwind CSS)
+
+This frontend uses **Tailwind CSS** (no component `.css` files). Tailwind is configured via:
+
+- `tailwind.config.js`
+- `postcss.config.cjs`
+- `src/index.css` (Tailwind directives)
+
 ## Features
 
 - **Login Page**: Dark-themed login form matching the design requirements
